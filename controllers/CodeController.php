@@ -11,7 +11,7 @@ class CodeController
         ob_start();
         include(ROOT.'templates/controller.php');
         $str = ob_get_clean();
-        file_put_contents(ROOT.'contentrs/'.$cname.'.php',$str);
+        file_put_contents(ROOT.'controllers/'.$cname.'.php',$str);
 
         //生成模型文件
         $mname = ucfirst($tableName);
@@ -38,7 +38,7 @@ class CodeController
         ob_start();
         include(ROOT.'templates/index.html');
         $str = ob_get_clean();
-        file_put_contents(ROOT.'views'.$tableName.'/index.html',$str);
+        file_put_contents(ROOT.'views/'.$tableName.'/index.html',$str);
 
     }
 }

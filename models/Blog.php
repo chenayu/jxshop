@@ -1,7 +1,7 @@
 <?php
 namespace models;
 
-class Test{
+class Blog{
     public function insert()
     {
 

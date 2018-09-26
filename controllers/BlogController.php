@@ -1,17 +1,16 @@
-<?php
 namespace controllers;
 
-class TestController{
+class BlogController{
     // 列表页
     public function index()
     {
-    view('test/index');
+    view('blog/index');
     }
 
     // 显示添加的表单
     public function create()
     {
-    view('test/create');
+    view('blog/create');
     }
 
     // 处理添加表单
@@ -23,7 +22,7 @@ class TestController{
     // 显示修改的表单
     public function edit()
     {
-    view('test/edit');
+    view('blog/edit');
     }
 
     // 修改表单的方法

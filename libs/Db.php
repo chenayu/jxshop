@@ -19,4 +19,9 @@ class Db
         }
         return self::$_obj;
     }
+
+    public function prepare($sql)
+    {
+       return $this->pdo->prepare($sql);
+    }
 }
