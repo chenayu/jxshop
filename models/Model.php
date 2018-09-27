@@ -8,14 +8,14 @@ use PDO;
  * 在这里实现所有表的：添加、修改、删除、查询翻页等功能
  */
 
-class Model
-{
+ class Model
+ {
     protected $_db;
 
     // 操作的表名，值由子类设置
     protected $table;
     // 表单中的数据，值由控制器设置
-    protected $data;
+    protected $data;    
 
     /**
      * $data = [
@@ -64,7 +64,7 @@ class Model
         $this->_after_write();
     }
 
-    // 接收表单中的数据
+     // 接收表单中的数据
     public function fill($data)
     {
         // 判断是否在白名单中
@@ -132,7 +132,7 @@ class Model
          */
         $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
         $offset = ($page-1)*$_option['per_page'];
-
+        
         $sql = "SELECT {$_option['fields']}
                  FROM {$this->table}
                  WHERE {$_option['where']} 
@@ -169,4 +169,4 @@ class Model
         $stmt->execute([$id]);
         return $stmt->fetch( PDO::FETCH_ASSOC );
     }
-}
+ }

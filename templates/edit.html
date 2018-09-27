@@ -16,7 +16,7 @@
 <div class="main-div">
     <form action="/<?=$tableName?>/update?id=<?='<?=$data[\'id\']?>';?>" method="post" enctype="multipart/form-data">
         <table width="100%" id="general-table">
-            <?php foreach($fields as $v):
+            <?php foreach($fields as $v): 
                 if($v['Field'] == 'id' || $v['Field'] == 'created_at')
                     continue ;
             ?>
@@ -24,12 +24,12 @@
                 <td class="label"><?=$v['Comment']?>:</td>
                 <td>
                     <?php if($v['Type']=='longtext'): ?>
-                    <textarea name="<?=$v['Field']?>" id="" cols="80" rows="10"><?='<?=$data[\''.$v['Field'].'\']?>';?></textarea>
+                        <textarea name="<?=$v['Field']?>" id="" cols="80" rows="10"><?='<?=$data[\''.$v['Field'].'\']?>';?></textarea>
                     <?php elseif( substr($v['Type'],0,4) == 'enum'): ?>
-                    <input type="radio" name="<?=$v['Field']?>" value="y" <?='<?php if($data[\''.$v['Field'].'\'] == \'y\') echo \'checked\'; ?>';?>> 是
-                    <input type="radio" name="<?=$v['Field']?>" value="n" <?='<?php if($data[\''.$v['Field'].'\'] == \'n\') echo \'checked\'; ?>';?>> 否
+                        <input type="radio" name="<?=$v['Field']?>" value="y" <?='<?php if($data[\''.$v['Field'].'\'] == \'y\') echo \'checked\'; ?>';?>> 是
+                        <input type="radio" name="<?=$v['Field']?>" value="n" <?='<?php if($data[\''.$v['Field'].'\'] == \'n\') echo \'checked\'; ?>';?>> 否
                     <?php else: ?>
-                    <input type='text' size="80" name='<?=$v['Field']?>' value='<?='<?=$data[\''.$v['Field'].'\']?>';?>'>
+                        <input type='text' size="80" name='<?=$v['Field']?>' value='<?='<?=$data[\''.$v['Field'].'\']?>';?>'>
                     <?php endif; ?>
                     <font color="red">*</font>
                 </td>

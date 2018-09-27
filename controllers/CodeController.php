@@ -43,7 +43,7 @@ class CodeController
         file_put_contents(ROOT.'controllers/'.$cname.'.php', "<?php\r\n".$str);
 
         // 3. 生成模型
-
+        
         ob_start();
         include(ROOT . 'templates/model.php');
         $str = ob_get_clean();
