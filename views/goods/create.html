@@ -49,14 +49,19 @@
                                 <tr>
                     <td class="label">一级分类ID:</td>
                     <td>
-                                                    <input type='text' size="80" name='cat1_id'>
+                        <select name="cat1_id" id="">
+                            <option value="">选择一级分类</option>
+                            <?php foreach($topCat as $v): ?>
+                            <option value="<?=['id']?>"><?=$v['cat_name']?></option>
+                            <?php endforeach ?>
+                        </select>
                                                 <font color="red">*</font>
                     </td>
                 </tr>
                                 <tr>
                     <td class="label">二级分类ID:</td>
                     <td>
-                                                    <input type='text' size="80" name='cat2_id'>
+                        <select name="cat2_id" id=""></select>
                                                 <font color="red">*</font>
                     </td>
                 </tr>
@@ -75,6 +80,33 @@
                     </td>
                 </tr>
                             </table>
+
+            <h3>商品属性 <input id="btn-attr" type="button" value="添加一个属性"></h3>
+            <div id="attr-container">
+                <table width="100%">
+                    <tr>
+                        <td class="label">属性名称:</td>
+                        <td>
+                            <input type='text' size="80" name='attr_name[]'>
+                            <font color="red">*</font>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">属性值:</td>
+                        <td>
+                            <input type='text' size="80" name='attr_value[]'>
+                            <font color="red">*</font>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label"></td>
+                        <td>
+                            <input type="button" onclick="del_attr(this)" type="button" value="删除">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
             <div class="button-div">
                 <input type="submit" value=" 确定 " />
                 <input type="reset" value=" 重置 " />
@@ -83,3 +115,60 @@
     </div>
     <?=view('common/footer')?></body>
 </html>
+<script src="/Js/jquery.min.js"></script>
+<script src="/Js/img_preview.js"></script>
+<script>
+
+    var attrStr = `<hr><table width="100%"><tbody>
+                <tr>
+                    <td class="label">属性名称:</td>
+                    <td>
+                        <input type='text' size="80" name='attr_name[]'>
+                        <font color="red">*</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">属性值:</td>
+                    <td>
+                        <input type='text' size="80" name='attr_value[]'>
+                        <font color="red">*</font>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label"></td>
+                    <td>
+                        <input onclick="del_attr(this)" type="button" value="删除">
+                    </td>
+                </tr>
+            </tbody></table>`;
+
+    $("#btn-attr").click(function() {
+       $("#attr-container").append(attrStr)
+    });
+
+
+    $("select[name=cat1_id]").change(function (){
+        //取出这个分类id
+        var id = $(this).val()
+        //如果不为空就执行ajax
+        if(id!="")
+        {
+            $.ajax({
+                type:"GET",
+                url:"/goods/ajax_get_cat?id="+id,
+                dataType:"json",
+                success:function(data)
+                {
+                    var str = "";
+                    for(var i=0;i<data.data.length;i++)
+                    {
+                        str +='<option value="'+data.data[i].id+'">'+data.data[i].cat_name+'</optin>'
+                    }
+                    $("select[name=cat2_id]").html(str);
+                    $("select[name=cat2_id]").trigger('change');
+                }
+            })
+        }
+
+    });
+</script>
